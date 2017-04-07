@@ -9,3 +9,6 @@ After=network.target network-online.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/walle.py
+
+[Install]
+WantedBy=multi-user.target

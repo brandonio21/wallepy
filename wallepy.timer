@@ -1,0 +1,9 @@
+[Unit]
+Description=Run wallepy every hour and on boot
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+
+[Install]
+WantedBy=timers.target

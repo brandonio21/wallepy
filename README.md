@@ -23,10 +23,12 @@ python3 walle.py
 ```
 
 wallepy also comes with a systemd service unit that changes your wallpaper on
-startup
+startup and every hour
 
 ```bash
-install wallepy.service /usr/lib/systemd/user
+cp wallepy.service /usr/lib/systemd/user
+cp wallepy.timer /usr/lib/systemd/user
 systemctl --user enable wallepy.service
+systemctl --user enable wallepy.timer
 systemctl --user start wallepy.service
 ```

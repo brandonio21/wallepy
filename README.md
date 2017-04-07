@@ -12,6 +12,7 @@ cached images are also removed.
 By default, wallepy has the following dependencies:
 * Python3
 * python-click
+* feh
 
 ## Installation/Run Instructions
 To install and run `wallepy`, do the following:

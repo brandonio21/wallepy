@@ -5,6 +5,3 @@ Documentation=https://github.com/brandonio21/wallepy
 [Service]
 Type=simple
 ExecStart=/usr/bin/walle.py
-
-[Install]
-WantedBy=default.target

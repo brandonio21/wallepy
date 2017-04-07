@@ -1,0 +1,11 @@
+[Unit]
+Description=Retrieves and sets random wallpapers from a specified url list
+Documentation=https://github.com/brandonio21/wallepy
+
+Wants=network-online.target
+After=network.target network-online.target
+
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/walle.py

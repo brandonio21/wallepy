@@ -67,11 +67,14 @@ def get_default_config_path(filename, is_dir=False):
 
 @click.command()
 @click.option('--urlfile', default=get_default_config_path('urls.txt'),
-              type=click.Path(exists=True))
+              type=click.Path(exists=True),
+              help='Path to a file containing newline delineated image URLs')
 @click.option('--imagedir',
               default=get_default_config_path('images', is_dir=True),
-              type=click.Path(exists=True))
-@click.option('--fehpath', default='feh')
+              type=click.Path(exists=True),
+              help='Path to directory where images will be downloaded')
+@click.option('--fehpath', default='feh',
+              help='Path to feh executable used to set wallpapers')
 def main(urlfile, imagedir, fehpath):
 
     # First, load all existing images into a cache.

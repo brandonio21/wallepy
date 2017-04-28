@@ -1,6 +1,6 @@
 wallepy
 =======
-An automatic wallpaper getter and setter using `feh`. Specify a list of URLs in
+An automatic wallpaper getter and setter. Specify a list of URLs in
 a textfile and wallepy will randomly choose one, download the image, and set it
 as your wallpaper.
 
@@ -10,9 +10,9 @@ cached images are also removed.
 
 ## Requirements
 By default, wallepy has the following dependencies:
-* Python3
+* Python3.6
 * python-click
-* feh
+* feh (If on Linux - otherwise, this is not requred)
 
 ## Installation/Run Instructions
 wallepy is available in the [AUR](https://aur.archlinux.org/packages/wallepy)

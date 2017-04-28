@@ -18,7 +18,18 @@ from urllib.request import urlopen
 
 
 def set_wallpaper(feh_path, wallpaper_path):
-    check_call([f'{feh_path}', '--bg-fill', f'{wallpaper_path}'])
+    if os.name == "nt":
+        sys_params_call = None
+        import ctypes
+        import struct
+        if struct.calcsize('P') * 8 == 64:
+            sys_params_call = ctypes.windll.user32.SystemParametersInfoW
+        else:
+            sys_params_call = ctypes.windll.user32.SystemParametersInfoA
+
+        assert sys_params_call(20, 0, wallpaper_path, 0)
+    else:
+        check_call([f'{feh_path}', '--bg-fill', f'{wallpaper_path}'])
 
 
 def get_urls_from_url_file(urlfile_path):
@@ -30,9 +41,11 @@ def get_urls_from_url_file(urlfile_path):
 
 
 def download_image_from_url(url, dest):
+    progress_dest = dest + ".download"
     with urlopen(url) as online_image_fd:
-        with open(dest, 'wb') as local_image_fd:
+        with open(progress_dest, 'wb') as local_image_fd:
             copyfileobj(online_image_fd, local_image_fd)
+    os.rename(progress_dest, dest)
 
 
 def assert_dir_exists(path):
@@ -85,7 +98,8 @@ def main(urlfile, imagedir, fehpath):
 
     # Now remove any images that are not in the url file
     for image_hash in existing_images:
-        if image_hash not in requested_urls:
+        if (os.path.splitext(image_hash)[1] == ".download" or
+                image_hash not in requested_urls):
             os.remove(os.path.join(imagedir, image_hash))
 
     # If there are no requested urls, exit early
